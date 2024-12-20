@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Rock Paper Stone</h1>
+  <p>Round <i class="round">1</i></p>
+  <p>Player score: <i class="player">0</i></p>
+  <p>Computer score: <i class="computer">0</i></p>
+
+
+  <script>
+
+    const player = document.querySelector('.player')
+    const computer = document.querySelector('.computer')
+    const round = document.querySelector('.round')
+
+    // Function genarate random integer between -1, 0 and 1
+    const RandomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+    // generate List to avoid if else statement
+    const GameList = {
+      0: "rock",
+      1: "paper",
+      2: "scissor"
+    }
+
+
+
+
+
+    // Playround
+    const Playround = (humanChoice, computerChoice) => {
+
+      // validate input
+      if (!Object.values(GameList).includes(humanChoice)) {
+        alert('you must enter a valid string')
+        return null
+      }
+      // rules
+      // 1. all the conditions plays wins
+      // 2. and draw
+      // 3. else computer win
+      if (
+        (humanChoice === 'rock' && computerChoice === 'scissor') ||
+        (humanChoice === 'paper' && computerChoice === 'rock') ||
+        (humanChoice === 'scissor' && computerChoice === 'paper')
+      ) {
+        // Player wins
+
+        player.innerHTML = parseInt(player.innerHTML) + 1;
+        return `You win! ${humanChoice} beats ${computerChoice}`;
+      } else if (humanChoice === computerChoice) {
+        return 'draw'
+      } else {
+        computer.innerHTML = parseInt(computer.innerHTML) + 1
+        return `You lose, ${computerChoice} beats ${humanChoice}`
+      }
+    }
+
+    for (let i = 1; i <= 5; i++) {
+      round.innerHTML = i
+      // computer's choice
+      const getComputerChoice = () => GameList[RandomInteger(0, 2)]
+      const computerChoice = getComputerChoice()
+
+      // human's Choice (processed)
+      const humanChoice = prompt('your choice').toLocaleLowerCase().trim()
+      const res = Playround(humanChoice, computerChoice)
+      if (res === null) {
+        i--
+        continue
+      }
+      console.log(res)
+
+    }
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
