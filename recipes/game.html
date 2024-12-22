@@ -54,15 +54,13 @@
         round.innerHTML = count
 
         if (round.textContent === "5") {
-          if (player.textContent > computer.textContent) {
+          if (parseInt(player.textContent) > parseInt(computer.textContent)) {
             alert('you win')
-          } else if (player.textContent === computer.textContent) {
+          } else if (parseInt(player.textContent) === parseInt(computer.textContent)) {
             alert('it is a draw')
           } else {
             alert('you lose')
           }
-
-          window.location.reload()
         }
 
 
