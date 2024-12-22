@@ -5,6 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .choice {
+      display: flex;
+      gap: 5px;
+    }
+
+    .choice button {
+      width: 50px;
+      height: 50px;
+    }
+  </style>
 </head>
 
 <body>
@@ -13,12 +24,56 @@
   <p>Player score: <i class="player">0</i></p>
   <p>Computer score: <i class="computer">0</i></p>
 
+  <div class="choice">
+    <button id="rock">rock</button>
+    <button id="paper">paper</button>
+    <button id="scissor">scissor</button>
+  </div>
+
+
 
   <script>
 
     const player = document.querySelector('.player')
     const computer = document.querySelector('.computer')
     const round = document.querySelector('.round')
+    let count = 1
+
+
+    // Get button and addClick evenet
+    const buttons = document.querySelectorAll('.choice button')
+    buttons.forEach(ele => {
+      ele.addEventListener('click', () => {
+
+        const getComputerChoice = () => GameList[RandomInteger(0, 2)]
+        const computerChoice = getComputerChoice()
+        console.log(Playround(ele.id, computerChoice))
+
+
+        count++
+        round.innerHTML = count
+
+        if (round.textContent === "5") {
+          if (player.textContent > computer.textContent) {
+            alert('you win')
+          } else if (player.textContent === computer.textContent) {
+            alert('it is a draw')
+          } else {
+            alert('you lose')
+          }
+
+          window.location.reload()
+        }
+
+
+
+
+
+
+
+      })
+
+    })
 
     // Function genarate random integer between -1, 0 and 1
     const RandomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
@@ -37,10 +92,10 @@
     const Playround = (humanChoice, computerChoice) => {
 
       // validate input
-      if (!Object.values(GameList).includes(humanChoice)) {
-        alert('you must enter a valid string')
-        return null
-      }
+      // if (!Object.values(GameList).includes(humanChoice)) {
+      //   alert('you must enter a valid string')
+      //   return null
+      // }
       // rules
       // 1. all the conditions plays wins
       // 2. and draw
@@ -62,22 +117,26 @@
       }
     }
 
-    for (let i = 1; i <= 5; i++) {
-      round.innerHTML = i
-      // computer's choice
-      const getComputerChoice = () => GameList[RandomInteger(0, 2)]
-      const computerChoice = getComputerChoice()
+    // play 5 rounds
+    // for (let i = 1; i <= 5; i++) {
+    //   round.innerHTML = i
+    //   // computer's choice
+    //   const getComputerChoice = () => GameList[RandomInteger(0, 2)]
+    //   const computerChoice = getComputerChoice()
 
-      // human's Choice (processed)
-      const humanChoice = prompt('your choice').toLocaleLowerCase().trim()
-      const res = Playround(humanChoice, computerChoice)
-      if (res === null) {
-        i--
-        continue
-      }
-      console.log(res)
+    //   // human's Choice (processed)
+    //   const humanChoice = prompt('your choice').toLocaleLowerCase().trim()
+    //   const res = Playround(humanChoice, computerChoice)
+    //   if (res === null) {
+    //     i--
+    //     continue
+    //   }
+    //   console.log(res)
 
-    }
+    // }
+
+
+
 
 
 
